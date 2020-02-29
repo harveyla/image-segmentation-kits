@@ -12,6 +12,8 @@ class Segmentation(Callback):
         pred = last_output
         pred[pred>=0.5] = 1
         pred[pred<0.5] = 0
+        pred = pred.cpu()
+        last_target = last_target.cpu()
         self.tp += ((pred==1) * (last_target==1)).float().sum()
         self.fp += ((pred==1) * (last_target==0)).float().sum()
         self.fn += ((pred==0) * (last_target==1)).float().sum()
