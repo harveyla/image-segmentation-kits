@@ -30,5 +30,5 @@ class Seg_F1(Segmentation):
     def on_epoch_end(self, last_metrics, **kwargs):
         self.precision = self.tp/(self.tp+self.fp)
         self.recall = self.tp/(self.tp+self.fn)
-        self.f1 = (self.precision * self.recall) / (self.precision + self.recall)
+        self.f1 = 2 * (self.precision * self.recall) / (self.precision + self.recall)
         return add_metrics(last_metrics, self.f1)
